@@ -10,8 +10,8 @@
         {{ article.content }}
         </p>
       </v-card-text>
-      <v-card-text>
-        <p align="right">
+      <v-card-text class='py-0'>
+        <p align="right" class='py-0'>
           작성: {{ article.created_at }}
           <br>
           수정: {{ article.updated_at }}
@@ -22,16 +22,25 @@
       <v-card-actions>
 
         <div v-if="isAuthor">
-          <router-link :to="{ name: 'articleEdit', params: { articlePk } }">
-            <v-btn>Edit</v-btn>
+          <router-link :to="{ name: 'articleEdit', params: { articlePk } }" class="text-decoration-none">
+            <v-btn
+            color = 'teal accent-4'
+            >
+            Edit
+            </v-btn>
           </router-link>
         
-          <v-btn class="mx-3" @click="deleteArticle(articlePk)">Delete</v-btn>
+          <v-btn 
+          color = 'red accent-4'
+          class="mx-3" 
+          @click="deleteArticle(articlePk)"
+          >Delete</v-btn>
         </div>
         <!-- Article Like UI -->
         <v-spacer></v-spacer>
         <div>
-          <v-btn
+          <v-btn icon
+            color ='white'
             @click="likeArticle(articlePk)"
           >
             <v-icon>mdi-heart</v-icon>

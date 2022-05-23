@@ -10,6 +10,7 @@ import ArticleEditView from "@/views/community/ArticleEditView";
 import MovieListView from "@/views/movie/MovieListView.vue";
 import MovieDetailView from "@/views/movie/MovieDetailView.vue";
 import RecommendView from "@/views/RecommendView";
+import RecommendTheaters from "@/views/RecommendTheaters";
 import ActorProfile from "@/views/movie/ActorProfile";
 
 import LoginView from "@/views/account/LoginView.vue";
@@ -65,6 +66,11 @@ const routes = [
     path: "/recommende/:username", // Home
     name: "movieRecommend",
     component: RecommendView,
+  },
+  {
+    path: "/theater", // Home
+    name: "movieTheater",
+    component: RecommendTheaters,
   },
   {
     path: "/movies/:moviePk",

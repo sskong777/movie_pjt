@@ -1,4 +1,4 @@
-#!/Users/seokhyeon/final_pjt/merge/Back/venv/bin/python
+#!/Users/seokhyeon/final_pjt/seokhyeon/Back/venv/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

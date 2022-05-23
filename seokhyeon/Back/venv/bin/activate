@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/seokhyeon/final_pjt/merge/Back/venv"
+VIRTUAL_ENV="/Users/seokhyeon/final_pjt/seokhyeon/Back/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

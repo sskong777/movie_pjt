@@ -1,7 +1,7 @@
 <template>
   <div class="card bg-black" style="width: 18rem;">
     <router-link 
-      :to="{ name: 'movie', params: {moviePk: movie.id} }" class='movie_link'>
+      :to="{ name: 'movie', params: {moviePk: movie.id} }" class='movie_link text-white'>
     
       <img :src="posterUrl" class="card-img-top" alt="...">
       <div class="card-body">
@@ -10,7 +10,6 @@
       </div>
     </router-link>
   </div>
-
 </template>
 
 <script>
@@ -44,7 +43,6 @@ export default {
 <style>
   .movie_link{
     text-decoration-line:none ;
-    color:aliceblue
   }
 
 

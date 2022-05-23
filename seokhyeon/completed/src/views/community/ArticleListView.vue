@@ -6,11 +6,14 @@
       <p v-if="isLoggedIn">
         <router-link class='btn btn-info btn-lg text-decoration-none text-white'
           :to="{ name: 'articleNew' }">
-          New
+        게시글 작성
         </router-link>
       </p>
-    <v-simple-table fixed-header>
-      <thead>
+    <v-simple-table
+    fixed-header 
+    dark>
+      <template v-slot:default >
+      <thead >
         <tr>
           <th scope="col">번호</th>
           <th scope="col">제목</th>
@@ -26,7 +29,7 @@
 
         <!-- 글 이동 링크 (제목) -->
         <td>
-          <router-link class='text-decoration-none'
+          <router-link class='text-decoration-none text-white'
             :to="{ name: 'article', params: {articlePk: article.pk} }">
             {{ article.title }}
          </router-link>
@@ -40,7 +43,7 @@
 
        </tr>
       </tbody>
-
+    </template>
     </v-simple-table>
    </div>
   

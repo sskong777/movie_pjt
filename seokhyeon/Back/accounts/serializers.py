@@ -5,7 +5,7 @@ from community.models import Article
 from movies.models import Movie
 from movies.views import favorite_movie
 from movies.serializers.movie import MovieSerializer
-
+from movies.serializers.movie import ReviewSerializer
 class ProfileSerializer(serializers.ModelSerializer):
 
     class ArticleSerializer(serializers.ModelSerializer):
@@ -25,10 +25,10 @@ class ProfileSerializer(serializers.ModelSerializer):
     # favorite_movies = MovieSerialiser(many=True)
     like_articles = ArticleSerializer(many=True)
     articles = ArticleSerializer(many=True)
-    
+    reviews = ReviewSerializer(many=True)
     class Meta:
         model = get_user_model()
-        fields = ('pk', 'username', 'email', 'like_articles', 'articles','favorite_movies')
+        fields = ('pk', 'username', 'email', 'like_articles', 'articles','favorite_movies','reviews',)
 
 
 

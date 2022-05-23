@@ -18,7 +18,7 @@
         <!-- <h2 style="font-weight: bold;">{{ result[0].title }} </h2>
         <hr> -->
         <div v-for="(re, idx) in result" :key='idx'>
-          <router-link class='text-decoration-none'
+          <router-link class='text-decoration-none text-white'
     :to="{ name: 'movie', params: {moviePk: re.id} }">
         <h3 class="fw-bold">{{ re.title }}</h3>
     </router-link>

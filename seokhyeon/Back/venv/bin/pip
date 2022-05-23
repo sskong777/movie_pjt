@@ -1,4 +1,4 @@
-#!/Users/seokhyeon/final_pjt/merge/Back/venv/bin/python
+#!/Users/seokhyeon/final_pjt/seokhyeon/Back/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

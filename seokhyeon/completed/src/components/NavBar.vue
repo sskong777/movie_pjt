@@ -11,6 +11,9 @@
           <li v-if="isLoggedIn" class='nav-item me-3'>
             <router-link :to="{ name: 'movieRecommend', params: { username } }">Recommend</router-link>
           </li>
+            <li class='nav-item me-3'>
+            <router-link :to="{ name: 'movieTheater' }">Theater</router-link>
+          </li>
           <li class='nav-item me-3'>
             <router-link :to="{ name: 'articles' }">Community</router-link>
           </li>

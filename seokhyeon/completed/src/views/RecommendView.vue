@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Recommend</h1>
+    <!-- <h1>Recommend</h1>
     <button @click="[recommendMovies(), topPick()]" class="btn btn-success">TOP 10</button>
     <button @click="[recommendMovies(), userPick()]" class="btn btn-success mx-5">User Recommend</button>
-    <button @click="[recommendMovies(), likePick()]" class="btn btn-success">Atrraction</button>
+    <button @click="[recommendMovies(), likePick()]" class="btn btn-success">Atrraction</button> -->
     <!-- <div v-if="topCheck"> -->
     <!-- <movie-card v-for="movie in recoMovies[0]" :key="movie.pk" :movie="movie">
     </movie-card>
@@ -17,7 +17,8 @@
     </movie-card>
   </div> -->
     
-      <vue-glide v-if="topCheck"
+    <h1>TOP 10</h1>
+      <!-- <vue-glide
       class="glide__track"
       data-glide-el="track"
       ref="slider"
@@ -30,9 +31,25 @@
         <RecoMovieCard :recomovie="recomovie"
           />
       </vue-glide-slide>
-    </vue-glide>
+    </vue-glide> -->
 
-      <vue-glide v-if="userCheck"
+   <carousel-3d :disable3d="true" :space="365" :clickable="false" :controls-visible="true" :width="400" :height="600" >
+      <slide v-for="(movie,idx) in Object.keys(recoMovies[0]).length"
+        :key="idx" :index="idx">
+        <figure>
+          <router-link 
+            :to="{ name: 'movie', params: {moviePk: recoMovies[0][idx].id} }" class='movie_link'>
+          <img :src="`https://image.tmdb.org/t/p/original/${recoMovies[0][idx].poster_path}`" alt="...">
+          </router-link>        
+      </figure>
+
+      </slide>
+    </carousel-3d>
+
+    <hr>
+
+    <h1>User Recommend</h1>
+      <vue-glide
       class="glide__track"
       data-glide-el="track"
       ref="slider"
@@ -46,8 +63,12 @@
           />
       </vue-glide-slide>
     </vue-glide>
- 
-      <vue-glide v-if="likeCheck"
+
+    <hr>
+
+    <h1>Attraction</h1>
+
+      <vue-glide
       class="glide__track"
       data-glide-el="track"
       ref="slider"
@@ -115,6 +136,9 @@
         this.topCheck = false
       }
     },
+    created(){
+      this.recommendMovies()
+    }
   }
 </script>
 
