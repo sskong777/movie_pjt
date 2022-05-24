@@ -1,164 +1,172 @@
 <template>
-  <v-container>
+  <v-container >
     <v-row>
-      <v-col>
-      </v-col>
+      <v-col> </v-col>
     </v-row>
     <v-row justify="center">
       <v-col cols="10">
-        <v-sheet col="9" min-height="20vh" rounded='lg' class="col justify-content-center align-items-center">
-           <v-col
-          cols="12"
-          col="6"
+        <v-sheet
+          col="9"
+          min-height="20vh"
+          rounded="lg"
+          class="col justify-content-center align-items-center"
         >
-          <v-text-field v-model="keyWord" @keyup.enter="keyWordSearch"
-            label="Theater"
-            placeholder="지역을 입력해주세요!"
-            filled
-            solo
-          ></v-text-field>
-        </v-col>
-        <!-- <input :v-model="keyWord" @keyup.enter="keyWordSearch" type="text" id="keyword" v-model="keyWord"> -->
-        <v-btn id="btn" @click="keyWordSearch">SEARCH</v-btn>
-    <!-- <v-chip class="ma-2" color="primary" label><v-icon left>mdi-account-circle-outline</v-icon>{{ currentUser.username }}</v-chip> -->
-
+          <v-col cols="12" col="6">
+            <v-text-field
+              v-model="keyWord"
+              @keyup.enter="keyWordSearch"
+              label="Theater"
+              placeholder="지역을 입력해주세요!"
+              filled
+              solo
+              :rules="rules"
+              hide-details="auto"
+              color="success"
+              loading        
+            ></v-text-field>
+        
+          </v-col>
+          <!-- <input :v-model="keyWord" @keyup.enter="keyWordSearch" type="text" id="keyword" v-model="keyWord"> -->
+          <v-btn id="btn" @click="keyWordSearch">SEARCH</v-btn>
+          <!-- <v-chip class="ma-2" color="primary" label><v-icon left>mdi-account-circle-outline</v-icon>{{ currentUser.username }}</v-chip> -->
         </v-sheet>
       </v-col>
     </v-row>
     <v-row justify="center">
       <v-col cols="10">
         <v-sheet min-height="70vh" rounded="lg">
-
-        <div id="map" style="height:70vh;"></div>
+          <div id="map" style="height: 70vh"></div>
         </v-sheet>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data: () => ({
-    keyWord: '',
-    local : [],
+    keyWord: "",
+    local: [],
   }),
-  mounted () {
+  mounted() {
     if (window.kakao && window.kakao.maps) {
-      this.initMap()
+      this.initMap();
     } else {
-      const script= document.createElement('script')
+      const script = document.createElement("script");
       /* global kakao */
-      script.onload = () => kakao.maps.load(this.initMap)
-      script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=b4c4152d46aff7b528f8e55917a9a7d5&autoload=false&libraries=services"
-      document.head.appendChild(script)
+      script.onload = () => kakao.maps.load(this.initMap);
+      script.src =
+        "//dapi.kakao.com/v2/maps/sdk.js?appkey=b4c4152d46aff7b528f8e55917a9a7d5&autoload=false&libraries=services";
+      document.head.appendChild(script);
     }
   },
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(["currentUser"]),
   },
   methods: {
-    ...mapActions(['fetchCurrentUser']),
+    ...mapActions(["fetchCurrentUser"]),
     // 현재 위치
-    initMap () {
-      var container = document.getElementById('map')
+    initMap() {
+      var container = document.getElementById("map");
       var options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 10
-      }
-      var map = new kakao.maps.Map(container, options)
+        center: new kakao.maps.LatLng(36.107173983233736, 128.41619087327746),
+        level: 6,
+      };
+      var map = new kakao.maps.Map(container, options);
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-          const lat = position.coords.latitude
-          const lon = position.coords.longitude
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
 
-          const locPosition = new kakao.maps.LatLng(lat, lon)
-          const message ='<div id="here">here!</div>'
+          const locPosition = new kakao.maps.LatLng(lat, lon);
+          const message = "사용자 현재 위치";
 
-
-          displayMarker(locPosition, message)
-        })
+          displayMarker(locPosition, message);
+        });
       } else {
-        var locPosition = new kakao.maps.LatLng(33.450701, 126.570667)
-        var message = '현재 위치를 찾을 수 없습니다'
+        var locPosition = new kakao.maps.LatLng(
+          36.107173983233736,
+          128.41619087327746
+        );
+        var message = "현재 위치를 찾을 수 없습니다";
 
-        displayMarker(locPosition, message)
+        displayMarker(locPosition, message);
       }
-      function displayMarker (locPosition, message) {
+      function displayMarker(locPosition, message) {
         const marker = new kakao.maps.Marker({
           map: map,
-          position: locPosition
-        })
+          position: locPosition,
+        });
 
-        const iwContent = message
-        const iwRemovaable = true
+        const iwContent = message;
+        const iwRemovaable = true;
 
         var infowindow = new kakao.maps.InfoWindow({
           content: iwContent,
-          removavle: iwRemovaable
-        })
-        infowindow.open(map, marker)
+          removavle: iwRemovaable,
+        });
+        infowindow.open(map, marker);
 
-        map.setCenter(locPosition)
+        map.setCenter(locPosition);
       }
     },
 
-
-    addScript () {
-      const script = document.createElement('script') 
-      script.onload = () => kakao.maps.load(this.initMap)
-      script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=b4c4152d46aff7b528f8e55917a9a7d5&autoload=false&libraries=services"
-      document.head.appendChild(script)
+    addScript() {
+      const script = document.createElement("script");
+      script.onload = () => kakao.maps.load(this.initMap);
+      script.src =
+        "//dapi.kakao.com/v2/maps/sdk.js?appkey=b4c4152d46aff7b528f8e55917a9a7d5&autoload=false&libraries=services";
+      document.head.appendChild(script);
     },
 
     keyWordSearch() {
-      var infowindow = new kakao.maps.InfoWindow({ zIndex: 1})
+      var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
-      const mapContainer = document.getElementById('map')
+      const mapContainer = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(33.663, 6.890),
-        level:10
-      }
+        center: new kakao.maps.LatLng(36.107173983233736, 128.41619087327746),
+        level: 4,
+      };
 
-      const map = new kakao.maps.Map(mapContainer, options)
+      const map = new kakao.maps.Map(mapContainer, options);
 
-      const ps = new kakao.maps.services.Places()
-      ps.keywordSearch(this.keyWord + ' 영화관', placesSearchCB, {
+      const ps = new kakao.maps.services.Places();
+      ps.keywordSearch(this.keyWord + " 영화관", placesSearchCB, {
         radius: 5000,
-      })
+      });
 
       function placesSearchCB(data, status) {
         if (status === kakao.maps.services.Status.OK) {
-          const bounds = new kakao.maps.LatLngBounds()
+          const bounds = new kakao.maps.LatLngBounds();
 
-          for (var i=0;i<data.length;i++){
-
-            displayMarker(data[i])
-            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
+          for (var i = 0; i < data.length; i++) {
+            displayMarker(data[i]);
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
           }
-          map.setBounds(bounds)
+          map.setBounds(bounds);
         } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-          console.log('hi')
-          alert('검색 결과가 없습니다')
+          console.log("hi");
+          alert("검색 결과가 없습니다");
         } else if (status === kakao.maps.services.Status.ERROR) {
-          alert('검색 결과 중 오류가 발생했습니다')
+          alert("검색 결과 중 오류가 발생했습니다");
         }
 
         function displayMarker(place) {
           var marker = new kakao.maps.Marker({
             map: map,
-            position: new kakao.maps.LatLng(place.y, place.x)
-          })
+            position: new kakao.maps.LatLng(place.y, place.x),
+          });
 
-          kakao.maps.event.addListener(marker, 'click', function () {
-            infowindow.setContent('<div style="padding:5px;font-size:0.8rem;">' + place.place_name + '</div>')
-            infowindow.open(map, marker)
-
-
-          })
+          kakao.maps.event.addListener(marker, "click", function () {
+            infowindow.setContent(
+              '<div style="padding:5px;font-size:0.8rem;">' +
+                place.place_name +
+                "</div>"
+            );
+            infowindow.open(map, marker);
+          });
         }
       }
     },
@@ -313,16 +321,15 @@ export default {
     //     infowindow.setContent(content)
     //     infowindow.open(map, marker)
     //   }
-      
+
     // }
-  }
-}
+  },
+};
 </script>
 
 <style>
 #btn {
-  background-color:mediumslateblue;
-  color:white
+  background-color: mediumslateblue;
+  color: white;
 }
-
 </style>

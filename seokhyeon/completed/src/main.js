@@ -30,6 +30,14 @@ import store from "./store";
 
 import Carousel3d from 'vue-carousel-3d';
 
+// font awesome
+import { library } from '@fortawesome/fontawesome-svg-core' 
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons' 
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome' 
+library.add(faUserSecret) 
+Vue.component('font-awesome-icon', FontAwesomeIcon) 
+Vue.config.productionTip = false
+
 Vue.use(Carousel3d);
 
 Vue.config.productionTip = false;

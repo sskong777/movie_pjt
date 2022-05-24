@@ -1,12 +1,31 @@
 <template>
-  <form @submit.prevent="onSubmit" class="review-list-form">
-    <label for="review">title: </label>
-    <input type="text" id="review" v-model="title" required>
-    <label for="review">content: </label>
-    <input type="text" id="review" v-model="content" required>
-    <!-- <label for="review">rank: </label>
-    <input type="number" id="review" v-model="rank" required> -->
-        <div class="text-center mt-12">
+  <div class="container">
+    <form @submit.prevent="onSubmit" width="80%" class="review-list-form">
+      <div align='left'>
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input
+          v-model="title"
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="TITLE"
+          required
+        />
+      </div>
+      <div align='left' class="my-10">
+        <label for="exampleFormControlTextarea1" class="form-label"
+          >Content</label
+        >
+        <textarea
+          v-model="content"
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="3"
+          placeholder="CONTENT"
+          required
+        ></textarea>
+      </div>
+      <div class="text-center mt-12">
         <v-rating
           v-model="rank"
           color="yellow darken-3"
@@ -16,37 +35,45 @@
           half-increments
           hover
           large
+          required
         ></v-rating>
-        </div>
-    <button @submit.prevent="onSubmit">Review</button>
-  </form>
+      </div>
+
+      <v-btn rounded dark type="submit" class="mt-4"> Create Review </v-btn>
+    </form>
+  </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: 'ReviewListForm',
+  name: "ReviewListForm",
   data() {
     return {
-      title: '',
-      content: '',
-      rank: null,
-    }
+      title: "",
+      content: "",
+      rank: 0,
+    };
   },
   computed: {
-    ...mapGetters(['movie']),
+    ...mapGetters(["movie"]),
   },
   methods: {
-    ...mapActions(['createReview']),
+    ...mapActions(["createReview"]),
     onSubmit() {
-      this.createReview({ moviePk: this.movie.id, title: this.title, content: this.content, rank: this.rank})
-      this.content = ''
-      this.title = ''
-      this.rank = null
-    }
-  }
-}
+      this.createReview({
+        moviePk: this.movie.id,
+        title: this.title,
+        content: this.content,
+        rank: this.rank * 2,
+      });
+      this.content = "";
+      this.title = "";
+      this.rank = 0;
+    },
+  },
+};
 </script>
 
 <style>

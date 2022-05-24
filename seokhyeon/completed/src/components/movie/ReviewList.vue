@@ -1,33 +1,36 @@
 <template>
   <div class="review-list">
-    
-    <ul>
-      <review-list-item 
-        v-for="review in reviews" 
-        :review="review" 
-        :key="review.pk">
-      </review-list-item>        
+    <div v-if="isLoggedIn">
+      <review-list-form></review-list-form>
+    </div>
+    <ul id="ul-tag">
+      <review-list-item
+        v-for="review in reviews"
+        :review="review"
+        :key="review.pk"
+      >
+      </review-list-item>
     </ul>
-
-    <review-list-form></review-list-form>
   </div>
 </template>
 
 <script>
-import ReviewListItem from '@/components/movie/ReviewListItem.vue'
-import ReviewListForm from '@/components/movie/ReviewListForm.vue'
-// import { mapGetters, mapActions } from 'vuex'
-
+import ReviewListItem from "@/components/movie/ReviewListItem.vue";
+import ReviewListForm from "@/components/movie/ReviewListForm.vue";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'ReviewList',
+  name: "ReviewList",
   components: { ReviewListForm, ReviewListItem },
   props: { reviews: Array },
-}
+  computed: {
+    ...mapGetters(["movies", "isLoggedIn"]),
+  },
+};
 </script>
 
 <style>
-.review-list {
-  border: 1px solid blue;
+#ul-tag {
+  list-style: none;
 }
 </style>

@@ -3,11 +3,15 @@
   <form @submit.prevent="onSubmit">
     <div class='form-group' align="left">
       <label for="title">Title </label>
-      <input v-model="newArticle.title" type="text" id="title" class='form-control' />
+      <input v-model="newArticle.title" type="text" id="title" class='form-control bg-black'  />
     </div>
+
     <div class='form-group my-3' align="left">
       <label for="content">Content </label>
-      <textarea v-model="newArticle.content" type="text" id="content" class='form-control' rows='5'></textarea>
+      <!-- <textarea v-model="newArticle.content" type="text" id="content" class='form-control' rows='5'></textarea> -->
+      <vue-editor dark v-model="newArticle.content"
+      id="editor"
+      ></vue-editor>
     </div>
 
     <div align="right">
@@ -19,9 +23,13 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { VueEditor } from "vue2-editor";
 
   export default {
     name: 'ArticleForm',
+    components:{
+      VueEditor,
+    },
     props: {
       article: Object,
       action: String,
@@ -52,4 +60,8 @@ import { mapActions } from 'vuex'
   }
 </script>
 
-<style></style>
+<style scoped>
+  #editor{
+    background: white;
+  }
+</style>

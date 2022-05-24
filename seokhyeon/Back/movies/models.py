@@ -15,6 +15,8 @@ class Actor(models.Model):
     actor_name = models.CharField(max_length=50)
     img_key = models.CharField(max_length=100, null=True)
     credit_id = models.CharField(max_length=100, null=True)
+    followed_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='following_actors')
+
 
 # class Actor(models.model):
 #     cast = models.JSONField()
@@ -44,7 +46,7 @@ class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviews')
     title = models.CharField(max_length=100)
     content = models.TextField()
-    rank = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+    rank = models.FloatField(validators=[MinValueValidator(1), MaxValueValidator(10)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')

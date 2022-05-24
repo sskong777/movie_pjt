@@ -32,6 +32,8 @@ def movie_detail(request,movie_pk):
     print(movie)
     serializer =  MovieSerializer(movie)
     return Response(serializer.data)
+
+    
 @api_view(['GET'])
 def actor_detail(request, actor_pk):
     # movie = get_object_or_404(Movie, pk=movie_pk)
@@ -126,4 +128,20 @@ def favorite_movie(request,movie_pk):
     else:
         movie.like_users.add(user)
         serializer = MovieSerializer(movie)
+        return Response(serializer.data)
+
+
+
+# Actor Follow
+@api_view(['POST'])
+def follow_actor(request, actor_pk):
+    actor = get_object_or_404(Actor, pk=actor_pk)
+    user = request.user
+    if actor.followed_users.filter(pk=user.pk).exists():
+        actor.followed_users.remove(user)
+        serializer = ActorSerializer(actor)
+        return Response(serializer.data)
+    else:
+        actor.followed_users.add(user)
+        serializer = ActorSerializer(actor)
         return Response(serializer.data)

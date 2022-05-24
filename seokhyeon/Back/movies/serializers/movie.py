@@ -6,16 +6,28 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
 
+User = get_user_model()
+
+
+# followed_users 추가
 class ActorSerializer(serializers.ModelSerializer):
     class MovieListSerializer(serializers.ModelSerializer):
         class Meta:
             model = Movie
-            fields = ('pk', 'poster_path', 'title')
+            fields = ('pk', 'poster_path', 'title') 
+    
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = User
+            fields = ('pk', 'username')
+
     movies = MovieListSerializer(many=True, read_only=True)
+    followed_users = UserSerializer(read_only=True, many=True)
+
     class Meta:
         model = Actor
         fields = '__all__'
-        read_only_fields = ('movies',)
+        read_only_fields = ('movies','followed_users',)
 
 # Genre Serializer
 class GenreSerializer(serializers.ModelSerializer):
@@ -25,7 +37,6 @@ class GenreSerializer(serializers.ModelSerializer):
 
 
 # Review Serializer
-User = get_user_model()
 
 class ReviewSerializer(serializers.ModelSerializer):
     class UserSerializer(serializers.ModelSerializer):

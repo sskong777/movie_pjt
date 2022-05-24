@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <!-- <img class="not-found" src="@/assets/404.jpg" alt="not-found"> -->
+  <div class="my-5">
     <h1>404 Not Found</h1>
+    
+    <img class="not-found" src="@/assets/404-error.webp" alt="not-found">
   </div>
 </template>
 
@@ -13,6 +14,6 @@
 
 <style>
   img.not-found {
-    width: 100%;
+    width: 90%;
   }
 </style>

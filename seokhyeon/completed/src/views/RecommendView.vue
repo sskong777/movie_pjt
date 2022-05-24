@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-5 pt-5">
     <!-- <h1>Recommend</h1>
     <button @click="[recommendMovies(), topPick()]" class="btn btn-success">TOP 10</button>
     <button @click="[recommendMovies(), userPick()]" class="btn btn-success mx-5">User Recommend</button>
@@ -18,6 +18,19 @@
   </div> -->
     
     <h1>TOP 10</h1>
+
+   <carousel-3d :disable3d="true" :space="365" :clickable="false" :controls-visible="true" :width="400" :height="580">
+      <slide v-for="(movie,idx) in Object.keys(recoMovies[0]).length"
+        :key="idx" :index="idx">
+        <figure>
+          <router-link 
+            :to="{ name: 'movie', params: {moviePk: recoMovies[0][idx].id} }" class='movie_link'>
+          <img :src="`https://image.tmdb.org/t/p/original/${recoMovies[0][idx].poster_path}`" alt="...">
+          </router-link>        
+      </figure>
+
+      </slide>
+    </carousel-3d>
       <!-- <vue-glide
       class="glide__track"
       data-glide-el="track"
@@ -33,55 +46,38 @@
       </vue-glide-slide>
     </vue-glide> -->
 
-   <carousel-3d :disable3d="true" :space="365" :clickable="false" :controls-visible="true" :width="400" :height="600" >
-      <slide v-for="(movie,idx) in Object.keys(recoMovies[0]).length"
+    <hr>
+
+    <h1 class="mt-5 pt-5">User Recommend</h1>
+   <carousel-3d :disable3d="true" :space="365" :clickable="false" :controls-visible="true" :width="400" :height="580">
+      <slide v-for="(movie,idx) in Object.keys(recoMovies[1]).length"
         :key="idx" :index="idx">
         <figure>
           <router-link 
-            :to="{ name: 'movie', params: {moviePk: recoMovies[0][idx].id} }" class='movie_link'>
-          <img :src="`https://image.tmdb.org/t/p/original/${recoMovies[0][idx].poster_path}`" alt="...">
+            :to="{ name: 'movie', params: {moviePk: recoMovies[1][idx].id} }" class='movie_link'>
+          <img :src="`https://image.tmdb.org/t/p/original/${recoMovies[1][idx].poster_path}`" alt="...">
           </router-link>        
       </figure>
 
       </slide>
     </carousel-3d>
 
-    <hr>
-
-    <h1>User Recommend</h1>
-      <vue-glide
-      class="glide__track"
-      data-glide-el="track"
-      ref="slider"
-      type="carousel"
-      :breakpoints="{3000: {perView: 7}, 1100: {perView: 5}, 600: {perView: 3}}"
-    >
-      <vue-glide-slide class="mx-2"
-        v-for="recomovie in recoMovies[1]"
-        :key="recomovie.pk">
-        <RecoMovieCard :recomovie="recomovie"
-          />
-      </vue-glide-slide>
-    </vue-glide>
 
     <hr>
 
-    <h1>Attraction</h1>
+    <h1 class="mt-5 pt-5">Attraction</h1>
+   <carousel-3d :disable3d="true" :space="365" :clickable="false" :controls-visible="true" :width="400" :height="580">
+      <slide v-for="(movie,idx) in Object.keys(recoMovies[2]).length"
+        :key="idx" :index="idx">
+        <figure>
+          <router-link 
+            :to="{ name: 'movie', params: {moviePk: recoMovies[2][idx].id} }" class='movie_link'>
+          <img :src="`https://image.tmdb.org/t/p/original/${recoMovies[2][idx].poster_path}`" alt="...">
+          </router-link>        
+      </figure>
 
-      <vue-glide
-      class="glide__track"
-      data-glide-el="track"
-      ref="slider"
-      type="carousel"
-      :breakpoints="{3000: {perView: 7}, 1100: {perView: 5}, 600: {perView: 3}}"
-    >
-      <vue-glide-slide class="mx-2"
-        v-for="recomovie in recoMovies[2]"
-        :key="recomovie.pk">
-        <RecoMovieCard :recomovie="recomovie"
-          />
-      </vue-glide-slide>
-    </vue-glide>
+      </slide>
+    </carousel-3d>
 
 
   </div>
@@ -91,11 +87,11 @@
   import { Glide, GlideSlide } from 'vue-glide-js'
   import { mapActions, mapGetters } from 'vuex'
   // import MovieCard from '@/components/movie/MovieCard.vue'
-  import RecoMovieCard from '@/components/movie/RecoMovieCard.vue'
+  // import RecoMovieCard from '@/components/movie/RecoMovieCard.vue'
   export default {
     name: 'MovieList',
     components: {
-      RecoMovieCard,
+      // RecoMovieCard,
       [Glide.name]: Glide,
       [GlideSlide.name]: GlideSlide,
     },

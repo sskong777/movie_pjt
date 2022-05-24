@@ -20,9 +20,10 @@
 
     <v-card-text class="text-h5 font-weight-bold">
       <h1>
-        <router-link class='text-decoration-none text-white'
+        <router-link class='text-decoration-none text-white' id='article'
             :to="{ name: 'article', params: {articlePk: favoarticle.pk} }">
             {{ favoarticle.title }}
+            
          </router-link>
        </h1>    
     </v-card-text>
@@ -39,22 +40,7 @@
         <v-list-item-content>
           <v-list-item-title>{{favoarticle.username }}</v-list-item-title>
         </v-list-item-content>
-        <!-- {{ favoarticle}} -->
-        <!-- <v-row 
-          class="my-3"
-          align="center"
-          justify="end"
-        >
-          <v-icon class="mr-1">
-            mdi-heart
-          </v-icon>
-          <span class="subheading mr-2">256</span>
-          <span class="mr-1">·</span>
-          <v-icon class="mr-1">
-            mdi-share-variant
-          </v-icon>
-          <span class="subheading">45</span>
-        </v-row> -->
+
       </v-list-item>
   </v-card>
 
@@ -97,4 +83,9 @@
   }
 </script>
 
-<style></style>
+<style>
+  #article{
+    font-family: 'KOTRA_BOLD-Bold';
+
+  }
+</style>

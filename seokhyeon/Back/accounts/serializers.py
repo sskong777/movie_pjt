@@ -6,19 +6,28 @@ from movies.models import Movie
 from movies.views import favorite_movie
 from movies.serializers.movie import MovieSerializer
 from movies.serializers.movie import ReviewSerializer
+from movies.serializers.movie import ActorSerializer
+
+
 class ProfileSerializer(serializers.ModelSerializer):
+
 
     class ArticleSerializer(serializers.ModelSerializer):
         
+        class UserSerializer(serializers.ModelSerializer):
+            class Meta:
+                model = get_user_model()
+                fields = ('pk', 'username')
+
+        user = UserSerializer(read_only=True)
+        like_users = UserSerializer(read_only=True, many=True)
         class Meta:
             model = Article
-            fields = ('pk', 'title', 'content')
-    
-    ## 추가
-    # class MovieSerialiser(serializers.ModelSerializer):
-    #     class Meta:
-    #         model = Movie
-    #         fields = ('pk','title','overview','poster_path','genres')
+            fields = ('pk', 'user', 'title', 'content', 'comments', 'like_users', 'created_at', 'updated_at')
+            
+
+    # following_actors 추가
+    following_actors = ActorSerializer(many=True)
 
     ## 추가(수정)
     favorite_movies = MovieSerializer(many=True)
@@ -28,7 +37,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True)
     class Meta:
         model = get_user_model()
-        fields = ('pk', 'username', 'email', 'like_articles', 'articles','favorite_movies','reviews',)
+        fields = ('pk', 'username', 'email', 'like_articles', 'articles','favorite_movies','reviews','following_actors',)
 
 
 

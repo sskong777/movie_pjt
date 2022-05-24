@@ -70,7 +70,7 @@ export default {
         .get(drf.movies.movies())
         .then(function (res) {
           commit("SET_MOVIES", res.data);
-          commit("SET_MOVIES_ID", res.data);
+          // commit("SET_MOVIES_ID", res.data);
         })
         .catch((err) => console.error(err.response));
     },
@@ -221,14 +221,13 @@ export default {
       })
         .then((res) => {
           commit("SET_MOVIE_REVIEWS", res.data);
+          console.log(res.data);
         })
         .catch((err) => console.error(err.response));
 
       axios
         .get(drf.movies.movie(moviePk))
-        // .then((res) => commit("SET_MOVIE", res.data))
         .then(function (res) {
-          commit("SET_MOVIE", res.data);
           commit("SET_REVIEW_AVG", res.data.reviews_rank_avg);
         })
         .catch((err) => {

@@ -1,14 +1,13 @@
 <template>
 
   <div class="container">
-    <v-card color="pink accent-2" dark>
+    <v-card color="" dark>
       <v-card-title>
       <h1>{{ article.title }}</h1>
       </v-card-title>
       <v-card-text class='text-h5'>
-        <p>
-        {{ article.content }}
-        </p>
+        <div v-html="article.content">
+        </div>
       </v-card-text>
       <v-card-text class='py-0'>
         <p align="right" class='py-0'>
@@ -23,18 +22,39 @@
 
         <div v-if="isAuthor">
           <router-link :to="{ name: 'articleEdit', params: { articlePk } }" class="text-decoration-none">
+
             <v-btn
-            color = 'teal accent-4'
+              color="success"
+              large
+              :disabled="loading"
+              class="ma-1"
+              plain
             >
-            Edit
+              <v-icon left>
+                mdi-pencil
+              </v-icon>
+              Edit
             </v-btn>
           </router-link>
         
-          <v-btn 
+          <!-- <v-btn 
           color = 'red accent-4'
           class="mx-3" 
           @click="deleteArticle(articlePk)"
-          >Delete</v-btn>
+          >Delete</v-btn> -->
+          <v-btn         
+          @click="deleteArticle(articlePk)"
+          :loading="loading"
+            class="ma-1"
+            color="error"
+            plain
+          >
+          <v-icon left>
+              delete
+            </v-icon>      
+            Delete
+          </v-btn>
+
         </div>
         <!-- Article Like UI -->
         <v-spacer></v-spacer>
