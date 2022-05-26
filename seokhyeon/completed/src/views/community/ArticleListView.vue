@@ -54,15 +54,15 @@
 
               <!-- 작성자 -->
               <td>
-              <router-link
-                :to="{
-                  name: 'profile',
-                  params: { username: article.user.username },
-                }"
-                class="fw-bold text-decoration-none text-white"
-              >
-              {{ article.user.username }}
-              </router-link>
+                <router-link
+                  :to="{
+                    name: 'profile',
+                    params: { username: article.user.username },
+                  }"
+                  class="fw-bold text-decoration-none text-white"
+                >
+                  {{ article.user.username }}
+                </router-link>
               </td>
               <!-- 댓글 개수/좋아요 개수 -->
               <td>{{ article.comment_count }} / {{ article.like_count }}</td>

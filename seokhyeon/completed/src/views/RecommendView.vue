@@ -16,22 +16,36 @@
     <movie-card v-for="movie in recoMovies[2]" :key="movie.pk" :movie="movie">
     </movie-card>
   </div> -->
-    
+
     <h1>TOP 10</h1>
 
-   <carousel-3d :disable3d="true" :space="365" :clickable="false" :controls-visible="true" :width="400" :height="580">
-      <slide v-for="(movie,idx) in Object.keys(recoMovies[0]).length"
-        :key="idx" :index="idx">
+    <carousel-3d
+      :disable3d="true"
+      :space="365"
+      :clickable="false"
+      :controls-visible="true"
+      :width="400"
+      :height="580"
+    >
+      <slide
+        v-for="(movie, idx) in Object.keys(recoMovies[0]).length"
+        :key="idx"
+        :index="idx"
+      >
         <figure>
-          <router-link 
-            :to="{ name: 'movie', params: {moviePk: recoMovies[0][idx].id} }" class='movie_link'>
-          <img :src="`https://image.tmdb.org/t/p/original/${recoMovies[0][idx].poster_path}`" alt="...">
-          </router-link>        
-      </figure>
-
+          <router-link
+            :to="{ name: 'movie', params: { moviePk: recoMovies[0][idx].pk } }"
+            class="movie_link"
+          >
+            <img
+              :src="`https://image.tmdb.org/t/p/original/${recoMovies[0][idx].poster_path}`"
+              alt="..."
+            />
+          </router-link>
+        </figure>
       </slide>
     </carousel-3d>
-      <!-- <vue-glide
+    <!-- <vue-glide
       class="glide__track"
       data-glide-el="track"
       ref="slider"
@@ -46,101 +60,125 @@
       </vue-glide-slide>
     </vue-glide> -->
 
-    <hr>
+    <hr />
 
     <h1 class="mt-5 pt-5">User Recommend</h1>
-   <carousel-3d :disable3d="true" :space="365" :clickable="false" :controls-visible="true" :width="400" :height="580">
-      <slide v-for="(movie,idx) in Object.keys(recoMovies[1]).length"
-        :key="idx" :index="idx">
+    <carousel-3d
+      :disable3d="true"
+      :space="365"
+      :clickable="false"
+      :controls-visible="true"
+      :width="400"
+      :height="580"
+    >
+      <slide
+        v-for="(movie, idx) in Object.keys(recoMovies[1]).length"
+        :key="idx"
+        :index="idx"
+      >
         <figure>
-          <router-link 
-            :to="{ name: 'movie', params: {moviePk: recoMovies[1][idx].id} }" class='movie_link'>
-          <img :src="`https://image.tmdb.org/t/p/original/${recoMovies[1][idx].poster_path}`" alt="...">
-          </router-link>        
-      </figure>
-
+          <router-link
+            :to="{ name: 'movie', params: { moviePk: recoMovies[1][idx].pk } }"
+            class="movie_link"
+          >
+            <img
+              :src="`https://image.tmdb.org/t/p/original/${recoMovies[1][idx].poster_path}`"
+              alt="..."
+            />
+          </router-link>
+        </figure>
       </slide>
     </carousel-3d>
 
-
-    <hr>
+    <hr />
 
     <h1 class="mt-5 pt-5">Attraction</h1>
-   <carousel-3d :disable3d="true" :space="365" :clickable="false" :controls-visible="true" :width="400" :height="580">
-      <slide v-for="(movie,idx) in Object.keys(recoMovies[2]).length"
-        :key="idx" :index="idx">
+    <carousel-3d
+      :disable3d="true"
+      :space="365"
+      :clickable="false"
+      :controls-visible="true"
+      :width="400"
+      :height="580"
+    >
+      <slide
+        v-for="(movie, idx) in Object.keys(recoMovies[2]).length"
+        :key="idx"
+        :index="idx"
+      >
         <figure>
-          <router-link 
-            :to="{ name: 'movie', params: {moviePk: recoMovies[2][idx].id} }" class='movie_link'>
-          <img :src="`https://image.tmdb.org/t/p/original/${recoMovies[2][idx].poster_path}`" alt="...">
-          </router-link>        
-      </figure>
-
+          <router-link
+            :to="{ name: 'movie', params: { moviePk: recoMovies[2][idx].pk } }"
+            class="movie_link"
+          >
+            <img
+              :src="`https://image.tmdb.org/t/p/original/${recoMovies[2][idx].poster_path}`"
+              alt="..."
+            />
+          </router-link>
+        </figure>
       </slide>
     </carousel-3d>
-
-
   </div>
 </template>
 
 <script>
-  import { Glide, GlideSlide } from 'vue-glide-js'
-  import { mapActions, mapGetters } from 'vuex'
-  // import MovieCard from '@/components/movie/MovieCard.vue'
-  // import RecoMovieCard from '@/components/movie/RecoMovieCard.vue'
-  export default {
-    name: 'MovieList',
-    components: {
-      // RecoMovieCard,
-      [Glide.name]: Glide,
-      [GlideSlide.name]: GlideSlide,
+import { Glide, GlideSlide } from "vue-glide-js";
+import { mapActions, mapGetters } from "vuex";
+// import MovieCard from '@/components/movie/MovieCard.vue'
+// import RecoMovieCard from '@/components/movie/RecoMovieCard.vue'
+export default {
+  name: "MovieList",
+  components: {
+    // RecoMovieCard,
+    [Glide.name]: Glide,
+    [GlideSlide.name]: GlideSlide,
+  },
+  data() {
+    return {
+      topCheck: false,
+      userCheck: false,
+      likeCheck: false,
+    };
+  },
+  computed: {
+    ...mapGetters(["recoMovies"]),
+    checkTop() {
+      return this.topCheck;
     },
-    data () {
-      return {
-        topCheck: false,
-        userCheck: false,
-        likeCheck: false,
-      }
+    checkUser() {
+      return this.userCheck;
     },
-    computed: {
-      ...mapGetters(['recoMovies']),
-      checkTop() {
-        return this.topCheck
-      },
-      checkUser() {
-        return this.userCheck
-      },
-      checkLike() {
-        return this.likeCheck
-      }
+    checkLike() {
+      return this.likeCheck;
     },
-    methods: {
-      ...mapActions(['recommendMovies']),
-      topPick: function () {
-        this.topCheck = !this.topCheck
-        this.userCheck = false
-        this.likeCheck = false
-      },
-      userPick: function () {
-        this.userCheck = !this.userCheck
-        this.topCheck = false
-        this.likeCheck = false
-      },
-      likePick: function () {
-        this.likeCheck = !this.likeCheck
-        this.userCheck = false
-        this.topCheck = false
-      }
+  },
+  methods: {
+    ...mapActions(["recommendMovies"]),
+    topPick: function () {
+      this.topCheck = !this.topCheck;
+      this.userCheck = false;
+      this.likeCheck = false;
     },
-    created(){
-      this.recommendMovies()
-    }
-  }
+    userPick: function () {
+      this.userCheck = !this.userCheck;
+      this.topCheck = false;
+      this.likeCheck = false;
+    },
+    likePick: function () {
+      this.likeCheck = !this.likeCheck;
+      this.userCheck = false;
+      this.topCheck = false;
+    },
+  },
+  created() {
+    this.recommendMovies();
+  },
+};
 </script>
 
 <style>
-  vue-glide-slide{
-    padding :3em;
-  }
-
+vue-glide-slide {
+  padding: 3em;
+}
 </style>

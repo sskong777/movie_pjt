@@ -1,8 +1,8 @@
-from dataclasses import fields
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from movies.models import Actor
 from community.models import Article
-from movies.models import Movie
+from movies.models import Movie,Review
 from movies.views import favorite_movie
 from movies.serializers.movie import MovieSerializer
 from movies.serializers.movie import ReviewSerializer
@@ -25,6 +25,21 @@ class ProfileSerializer(serializers.ModelSerializer):
             model = Article
             fields = ('pk', 'user', 'title', 'content', 'comments', 'like_users', 'created_at', 'updated_at')
             
+    class ReviewSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Review
+            fields = ('pk', 'title', 'content', 'movie', 'rank')
+    articles = ArticleSerializer(many=True)
+    reviews = ReviewSerializer(many=True)
+    class ActorSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Actor
+            fields =('pk', 'actor_name', 'img_key')
+
+    class MovieSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Movie
+            fields=('id', 'title', 'poster_path')
 
     # following_actors 추가
     following_actors = ActorSerializer(many=True)
@@ -33,8 +48,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     favorite_movies = MovieSerializer(many=True)
     # favorite_movies = MovieSerialiser(many=True)
     like_articles = ArticleSerializer(many=True)
-    articles = ArticleSerializer(many=True)
-    reviews = ReviewSerializer(many=True)
+
     class Meta:
         model = get_user_model()
         fields = ('pk', 'username', 'email', 'like_articles', 'articles','favorite_movies','reviews','following_actors',)

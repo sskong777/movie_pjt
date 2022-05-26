@@ -15,11 +15,11 @@
       <v-text-field
         dark
         label="댓글을 수정하세요."
-        :rules="rules"
         hide-details="auto"
         v-model="payload.content"
         color="success"
         loading
+
       ></v-text-field>
 
       <!-- <v-text-field
@@ -28,24 +28,11 @@
         disabled
       ></v-text-field> -->
       <p align="right">
-        <v-btn
-          :loading="loading"
-          class="ma-1"
-          color="primary"
-          plain
-          @click="onUpdate"
-        >
+        <v-btn class="ma-1" color="primary" plain @click="onUpdate">
           Update
         </v-btn>
 
-        <v-btn
-          class="ma-2"
-          :disabled="loading"
-          color="red"
-          plain
-          large
-          @click="switchIsEditing"
-        >
+        <v-btn class="ma-2" color="red" plain large @click="switchIsEditing">
           Cancle
         </v-btn>
       </p>
@@ -60,25 +47,12 @@
       color = "white"
       @click="switchIsEditing">Edit</v-btn> -->
 
-      <v-btn
-        color="success"
-        large
-        :disabled="loading"
-        class="ma-1"
-        plain
-        @click="switchIsEditing"
-      >
+      <v-btn color="success" large class="ma-1" plain @click="switchIsEditing">
         <v-icon left> mdi-pencil </v-icon>
         Edit
       </v-btn>
 
-      <v-btn
-        @click="deleteComment(payload)"
-        :loading="loading"
-        class="ma-1"
-        color="error"
-        plain
-      >
+      <v-btn @click="deleteComment(payload)" class="ma-1" color="error" plain>
         <v-icon left> delete </v-icon>
         Delete
       </v-btn>

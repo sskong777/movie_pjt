@@ -1,13 +1,21 @@
 <template>
-  <nav class="navbar navbar-expand-xl navbar-dark bg-black sticky-top py-5 stroke fill">
+  <nav
+    class="navbar navbar-expand-xl navbar-dark bg-black sticky-top py-5 stroke fill"
+  >
     <!-- <ul> -->
     <div class="container-fluid d-flex justify-content-between">
-      <router-link :to="{ name: 'movies' }" class="navbar-brand text-danger fw-bold"
-        >
-        <img src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/254/7329279254_4f67787a-afe9-4bda-8c74-90a88f6ddf78.png?cb=1653357128
-      " alt="" width="100" height="70">
-        </router-link
+      <router-link
+        :to="{ name: 'movies' }"
+        class="navbar-brand text-danger fw-bold"
       >
+        <img
+          src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/254/7329279254_4f67787a-afe9-4bda-8c74-90a88f6ddf78.png?cb=1653357128
+      "
+          alt=""
+          width="100"
+          height="70"
+        />
+      </router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -20,58 +28,55 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-
       <div
         class="collapse navbar-collapse flex-grow-0"
         id="navbarSupportedContent"
       >
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
-
           <li class="nav-item me-3">
-            <router-link :to="{ name: 'movies' }"
-              class="nav-link"
-              >
+            <router-link :to="{ name: 'movies' }" class="nav-link">
               Home
-              </router-link
-            >
+            </router-link>
           </li>
           <li v-if="isLoggedIn" class="nav-item me-3">
-            <router-link :to="{ name: 'movieRecommend', params: { username } }"
+            <router-link
+              :to="{ name: 'movieRecommend', params: { username } }"
               class="nav-link"
               >Recommend</router-link
             >
           </li>
           <li class="nav-item me-3">
-            <router-link :to="{ name: 'movieTheater' }"
-            class="nav-link"
-            > Theater</router-link>
+            <router-link :to="{ name: 'movieTheater' }" class="nav-link">
+              Theater</router-link
+            >
           </li>
           <li class="nav-item me-3">
-            <router-link :to="{ name: 'articles' }"
-            class="nav-link"
-            >Community</router-link>
+            <router-link :to="{ name: 'articles' }" class="nav-link"
+              >Community</router-link
+            >
           </li>
           <li v-if="!isLoggedIn" class="nav-item me-3">
-            <router-link :to="{ name: 'login' }"
-            class="nav-link"
-            >Login</router-link>
+            <router-link :to="{ name: 'login' }" class="nav-link"
+              >Login</router-link
+            >
           </li>
           <li v-if="!isLoggedIn" class="nav-item me-3">
-            <router-link :to="{ name: 'signup' }"
-            class="nav-link"
-            >Signup</router-link>
+            <router-link :to="{ name: 'signup' }" class="nav-link"
+              >Signup</router-link
+            >
           </li>
           <li v-if="isLoggedIn" class="nav-item me-3">
-            <router-link :to="{ name: 'profile', params: { username } }"
-            class="nav-link"
+            <router-link
+              :to="{ name: 'profile', params: { username } }"
+              class="nav-link"
             >
               {{ currentUser.username }}'s page
             </router-link>
           </li>
           <li v-if="isLoggedIn">
-            <router-link :to="{ name: 'logout' }"
-            class="nav-link"
-            >Logout</router-link>
+            <router-link :to="{ name: 'logout' }" class="nav-link"
+              >Logout</router-link
+            >
           </li>
         </ul>
       </div>
@@ -95,10 +100,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-
-
 /* NAVIGATION */
 nav {
   width: 100%;
@@ -127,7 +128,7 @@ nav ul li a {
 nav ul li a,
 nav ul li a:after,
 nav ul li a:before {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 nav ul li a:hover {
   color: red;
@@ -135,9 +136,7 @@ nav ul li a:hover {
 
 nav a.router-link-exact-active {
   color: crimson;
-  }
-
-
+}
 
 /* fill stroke */
 nav.stroke ul li a,
@@ -152,10 +151,10 @@ nav.fill ul li a:after {
   right: 0;
   margin: auto;
   width: 0%;
-  content: '.';
+  content: ".";
   color: transparent;
-  background: crimson;
-  height: 1px;
+  background:red;
+  height: 5px;
 }
 nav.stroke ul li a:hover:after {
   width: 100%;
@@ -167,12 +166,12 @@ nav.fill ul li a {
 
 nav.fill ul li a:after {
   text-align: left;
-  content: '.';
+  content: ".";
   margin: 0;
   opacity: 0;
 }
 nav.fill ul li a:hover {
-  color:crimson;
+  color: crimson;
   z-index: 1;
 }
 nav.fill ul li a:hover:after {
@@ -183,8 +182,6 @@ nav.fill ul li a:hover:after {
   opacity: 1;
 }
 
-
- 
 /* SHIFT */
 /* nav.shift ul li a {
   
@@ -216,8 +213,4 @@ nav.shift ul li a:hover:after {
   visibility: visible;
   height: 100%;
 } */
-
-
 </style>
-
-

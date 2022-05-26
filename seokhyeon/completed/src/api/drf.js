@@ -37,6 +37,8 @@ export default {
     reviews: (moviePk) => HOST + MOVIES + `${moviePk}/` + REVIEWS,
     review: (moviePk, reviewPk) =>
       HOST + MOVIES + `${moviePk}/` + REVIEWS + `${reviewPk}/`,
-    actor: (actorPk) => HOST + MOVIES + "actor/" + `${actorPk}`,
+    actor: (actorPk) => HOST + MOVIES + "actor/" + `${actorPk}/`,
+    followActor: (actorPk) =>
+      HOST + MOVIES + "actor/" + `${actorPk}/` + "follow/",
   },
 };

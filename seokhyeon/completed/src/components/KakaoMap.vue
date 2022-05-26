@@ -1,5 +1,5 @@
 <template>
-  <v-container >
+  <v-container>
     <v-row>
       <v-col> </v-col>
     </v-row>
@@ -19,12 +19,10 @@
               placeholder="지역을 입력해주세요!"
               filled
               solo
-              :rules="rules"
               hide-details="auto"
-              color="success"
-              loading        
+              color="purple"
+              loading
             ></v-text-field>
-        
           </v-col>
           <!-- <input :v-model="keyWord" @keyup.enter="keyWordSearch" type="text" id="keyword" v-model="keyWord"> -->
           <v-btn id="btn" @click="keyWordSearch">SEARCH</v-btn>

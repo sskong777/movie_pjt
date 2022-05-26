@@ -19,15 +19,15 @@ class ActorSerializer(serializers.ModelSerializer):
     class UserSerializer(serializers.ModelSerializer):
         class Meta:
             model = User
-            fields = ('pk', 'username')
+            fields = ('pk',)
 
     movies = MovieListSerializer(many=True, read_only=True)
-    followed_users = UserSerializer(read_only=True, many=True)
+    user = UserSerializer(read_only=True, many=True)
 
     class Meta:
         model = Actor
         fields = '__all__'
-        read_only_fields = ('movies','followed_users',)
+        read_only_fields = ('movies',)
 
 # Genre Serializer
 class GenreSerializer(serializers.ModelSerializer):
@@ -53,21 +53,12 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 # Movie Serializers
 class MovieListSerializer(serializers.ModelSerializer):
-    class UserSerializer(serializers.ModelSerializer):
 
-        class Meta:
-            model = User
-            fields = ('pk', 'username')
-
-    favorite_count = serializers.IntegerField(default=0)
-    reviews_rank_avg = serializers.FloatField(default=0)
-    reviews = ReviewSerializer(many=True, read_only=True)
     genres = GenreSerializer(many=True, read_only=True)
-    actors = ActorSerializer(many=True, read_only=True)
-    user = UserSerializer(read_only=True)
     class Meta:
         model = Movie
-        fields = '__all__'
+        fields = ('pk', 'title', 'poster_path', 'genres')
+
 
 class MovieSerializer(serializers.ModelSerializer):
 
@@ -81,7 +72,6 @@ class MovieSerializer(serializers.ModelSerializer):
     genres = GenreSerializer(many=True, read_only=True)
     actors = ActorSerializer(many=True, read_only=True)
     # movies/views.py => movie_detail에서 annotate로 추가
-    reviews_rank_avg = serializers.FloatField(default=0)
     class Meta:
         model = Movie
         fields = '__all__'

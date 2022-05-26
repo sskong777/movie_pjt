@@ -20,12 +20,9 @@
           <v-list-item
             style="font-size: 1.2vw"
             link
-            :to="{ name: 'movie', params: { moviePk: item.id } }"
-            >
-            <v-icon
-            left >
-              mdi-magnify 
-            </v-icon>
+            :to="{ name: 'movie', params: { moviePk: item.pk } }"
+          >
+            <v-icon left> mdi-magnify </v-icon>
             {{ item.title }}</v-list-item
           >
         </template>

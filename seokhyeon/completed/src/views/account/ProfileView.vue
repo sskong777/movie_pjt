@@ -35,14 +35,40 @@
         </figure>
       </slide>
     </carousel-3d>
+    <hr />
+    <!--  -->
+    <!--  -->
+    <p class="h2">팔로우한 배우</p>
+    <v-card width="100%" class="mx-auto">
+      <v-container class="pa-1">
+        <v-item-group v-model="selected" multiple>
+          <div
+            v-if="!!profile.following_actors"
+            class="row"
+            style="background-color: black"
+          >
+            <reco-actor-card
+              v-for="actor in profile.following_actors"
+              :key="actor.pk"
+              :actor="actor"
+              class=""
+            >
+            </reco-actor-card>
+          </div>
+        </v-item-group>
+      </v-container>
+    </v-card>
 
+    <!--  -->
+    <!--  -->
     <hr />
     <h2>내가 작성한 글</h2>
 
     <carousel-3d
       :perspective="90"
       :controls-visible="true"
-      :width="600"
+      :width="500"
+      :heigth="500"
       :display="5"
     >
       <slide
@@ -51,55 +77,42 @@
         :index="i"
         class="bg-dark"
       >
-  <v-container class="mx-0">
-    <v-row justify="space-around">
-      <v-card :width="600">
-        <v-img
-          height="25%"
-          src="https://picsum.photos/600/600/?random"
-        >
-          <v-app-bar
-            flat
-            color="rgba(0, 0, 0, 0)"
-          >
-          <v-icon
-            color="grey lighten-1"
-            large
-          >
-            mdi-account
-          </v-icon>       
-            <v-toolbar-title class="text-h6 white--text pl-0">
-            {{ article.user.username }}
-            </v-toolbar-title>
+        <!-- <v-container class="mx-0"> -->
+        <v-row justify="space-around">
+          <v-card>
+            <v-img height="25%" src="https://picsum.photos/600/600/?random">
+              <v-app-bar flat color="rgba(0, 0, 0, 0)">
+                <v-icon color="grey lighten-1" large> mdi-account </v-icon>
+                <v-toolbar-title class="text-h6 white--text pl-0">
+                  {{ article.user.username }}
+                </v-toolbar-title>
 
-            <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
 
-            <router-link class='text-decoration-none text-white' id='article'
-              :to="{ name: 'article', params: {articlePk: article.pk} }">
-            <v-btn
-              color="white"
-              icon
-            >
+                <router-link
+                  class="text-decoration-none text-white"
+                  id="article"
+                  :to="{ name: 'article', params: { articlePk: article.pk } }"
+                >
+                  <v-btn color="white" icon>
+                    <v-icon>article</v-icon>
+                  </v-btn>
+                </router-link>
+              </v-app-bar>
 
-              <v-icon>article</v-icon>
-            </v-btn>
-            </router-link>
-          </v-app-bar>
+              <v-card-title class="white--text">
+                <p>{{ article.title }}</p>
+              </v-card-title>
+            </v-img>
 
-          <v-card-title class="white--text mt-8">
-            <p>{{ article.title}}</p>
-          </v-card-title>
-        </v-img>
-
-        <v-card-text>
-          <div class="font-weight-bold">
-            {{ article.content }}
-            
-          </div>
-        </v-card-text>
-      </v-card>
-    </v-row>
-  </v-container>
+            <v-card-text>
+              <div class="font-weight-bold">
+                <p v-html="article.content"></p>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-row>
+        <!-- </v-container> -->
       </slide>
     </carousel-3d>
 
@@ -109,9 +122,9 @@
     <carousel-3d
       :perspective="180"
       :controls-visible="true"
-      :width="600"
+      :width="500"
+      :heigth="500"
       :display="5"
-      
     >
       <slide
         v-for="(article, i) in profile.like_articles"
@@ -119,55 +132,42 @@
         :index="i"
         class="bg-dark"
       >
-  <v-container class="mx-0">
-    <v-row justify="space-around">
-      <v-card>
-        <v-img
-          height="25%"
-          src="https://picsum.photos/600/600/?random"
-        >
-          <v-app-bar
-            flat
-            color="rgba(0, 0, 0, 0)"
-          >
-          <v-icon
-            color="grey lighten-1"
-            large
-          >
-            mdi-account
-          </v-icon>       
-            <v-toolbar-title class="text-h6 white--text pl-0">
-            {{ article.user.username }}
-            </v-toolbar-title>
+        <!-- <v-container class="mx-0"> -->
+        <v-row justify="space-around">
+          <v-card>
+            <v-img height="25%" src="https://picsum.photos/600/600/?random">
+              <v-app-bar flat color="rgba(0, 0, 0, 0)">
+                <v-icon color="grey lighten-1" large> mdi-account </v-icon>
+                <v-toolbar-title class="text-h6 white--text pl-0">
+                  {{ article.user.username }}
+                </v-toolbar-title>
 
-            <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
 
-            <router-link class='text-decoration-none text-white' id='article'
-              :to="{ name: 'article', params: {articlePk: article.pk} }">
-            <v-btn
-              color="white"
-              icon
-            >
+                <router-link
+                  class="text-decoration-none text-white"
+                  id="article"
+                  :to="{ name: 'article', params: { articlePk: article.pk } }"
+                >
+                  <v-btn color="white" icon>
+                    <v-icon>article</v-icon>
+                  </v-btn>
+                </router-link>
+              </v-app-bar>
 
-              <v-icon>article</v-icon>
-            </v-btn>
-            </router-link>
-          </v-app-bar>
+              <v-card-title class="white--text">
+                <p>{{ article.title }}</p>
+              </v-card-title>
+            </v-img>
 
-          <v-card-title class="white--text mt-8">
-            <p>{{ article.title}}</p>
-          </v-card-title>
-        </v-img>
-
-        <v-card-text>
-          <div class="font-weight-bold">
-            {{ article.content }}
-            
-          </div>
-        </v-card-text>
-      </v-card>
-    </v-row>
-  </v-container>
+            <v-card-text>
+              <div class="font-weight-bold">
+                <p v-html="article.content"></p>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-row>
+        <!-- </v-container> -->
       </slide>
     </carousel-3d>
 
@@ -188,10 +188,12 @@
 </template>
 
 <script>
-import { Glide, GlideSlide } from "vue-glide-js";
+// import { Glide, GlideSlide } from "vue-glide-js";
 import { Carousel3d, Slide } from "vue-carousel-3d";
 
 import { mapGetters, mapActions } from "vuex";
+import RecoActorCard from "@/components/movie/RecoActorCard";
+
 // import FavoriteMovieCard from '@/components/movie/FavoriteMovieCard.vue'
 // import FavoriteArticle from "@/views/community/FavoriteArticle.vue";
 
@@ -200,10 +202,16 @@ export default {
   components: {
     // FavoriteMovieCard,
     // FavoriteArticle,
-    [Glide.name]: Glide,
-    [GlideSlide.name]: GlideSlide,
+    // [Glide.name]: Glide,
+    // [GlideSlide.name]: GlideSlide,
     Carousel3d,
     Slide,
+    RecoActorCard,
+  },
+  data() {
+    return {
+      selected: [],
+    };
   },
   computed: {
     ...mapGetters(["profile"]),
@@ -221,5 +229,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <form @submit.prevent="onSubmit" width="80%" class="review-list-form">
-      <div align='left'>
+      <div align="left">
         <label for="exampleFormControlInput1" class="form-label">Title</label>
         <input
           v-model="title"
@@ -12,7 +12,7 @@
           required
         />
       </div>
-      <div align='left' class="my-10">
+      <div align="left" class="my-10">
         <label for="exampleFormControlTextarea1" class="form-label"
           >Content</label
         >

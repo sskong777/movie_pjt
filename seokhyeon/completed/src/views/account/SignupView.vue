@@ -4,7 +4,7 @@
       " alt="" width="300" height="200" class="my-5"> -->
 
     <div class="box" align="center">
-      <img class="" src="@/assets/머리탁.jpeg" alt="" />
+      <img class="" src="@/assets/머리탁.png" alt="" />
       <h1 class="text">앗챠챠 회원가입</h1>
     </div>
     <hr />

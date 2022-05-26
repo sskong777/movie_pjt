@@ -7,29 +7,37 @@ from .serializers.movie import ActorSerializer, MovieListSerializer, MovieSerial
 from rest_framework import serializers
 from django.db.models import Count,Avg
 from django.db.models.functions import Coalesce
+from django.core.paginator import Paginator
 
 @api_view(['GET'])
 def movie_list(request):
     movies = get_list_or_404(Movie)
-    movies = Movie.objects.annotate(
-        reviews_rank_avg = Avg('reviews__rank', distinct=True)
-    ).all()
+
+
+    # movies = Movie.objects.annotate(
+    #     reviews_rank_avg = Avg('reviews__rank', distinct=True)
+    # ).all()
+
+
     serializer = MovieListSerializer(movies, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
 def movie_detail(request,movie_pk):
-    # movie = get_object_or_404(Movie, pk=movie_pk)
-    movie = Movie.objects.annotate(
-        reviews_rank_avg = Avg('reviews__rank', distinct=True)
-    ).get(pk=movie_pk)
+    movie = get_object_or_404(Movie, pk=movie_pk)
+
+
+    # movie = Movie.objects.annotate(
+    #     reviews_rank_avg = Avg('reviews__rank', distinct=True)
+    # ).get(pk=movie_pk)
+
+
     # movie = Movie.objects\
     #     .annotate(
     #         reviews_rank_avg = Avg(
     #         Review.objects.filter(pk=movie_pk).values('rank')))
     # print(movie)
-    print(movie)
     serializer =  MovieSerializer(movie)
     return Response(serializer.data)
 
@@ -145,3 +153,9 @@ def follow_actor(request, actor_pk):
         actor.followed_users.add(user)
         serializer = ActorSerializer(actor)
         return Response(serializer.data)
+
+
+
+@api_view(['GET'])
+def movie_paginator(request):
+    movies = get_object_or_404(Movie )

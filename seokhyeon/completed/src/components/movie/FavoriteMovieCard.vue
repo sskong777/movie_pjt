@@ -1,9 +1,11 @@
 <template>
-  <div class="card bg-black" style="width: 13rem;">
-    <router-link 
-      :to="{ name: 'movie', params: {moviePk: favomovie.id} }" class='movie_link'>
-    
-      <img :src="posterUrl" class="card-img-top mx-5 my-5" alt="...">
+  <div v-if="!!favomovie" class="card bg-black" style="width: 13rem">
+    <router-link
+      :to="{ name: 'movie', params: { moviePk: favomovie.id } }"
+      class="movie_link"
+    >
+      <img :src="posterUrl" class="card-img-top mx-5 my-5" alt="..." />
+
       <div class="card-body">
         <h5 class="text-center text-white">{{ favomovie.title }}</h5>
         <!-- <p class="card-text">{{ movie.overview }}</p> -->

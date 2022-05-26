@@ -124,7 +124,7 @@ export default {
           alert("성공적으로 logout!");
           router.push({ name: "login" });
         })
-        .error((err) => {
+        .catch((err) => {
           console.error(err.response);
         });
     },

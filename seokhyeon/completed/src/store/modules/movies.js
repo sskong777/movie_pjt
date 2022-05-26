@@ -36,6 +36,7 @@ export default {
   mutations: {
     SET_MOVIES: (state, movies) => (state.movies = movies),
     SET_MOVIE: (state, movie) => (state.movie = movie),
+    SET_ACTOR: (state, actor) => (state.actor = actor),
     SET_RECO_MOVIES: (state, recoMovies) => (state.recoMovies = recoMovies),
     SET_MOVIE_REVIEWS: (state, reviews) => (state.movie.reviews = reviews),
     SET_REVIEW_AVG: (state, reviewAvg) => (state.reviewAvg = reviewAvg),
@@ -44,17 +45,6 @@ export default {
         state.moviesId.push(movie);
       });
     },
-    SET_ACTOR: (state, actor) => (state.actor = actor),
-    // SET_ACTOR_MOVIES: function (state, actor_movies) {
-    //   state.actorMovies = [];
-    //   actor_movies.forEach(function (actor_movie) {
-    //     this.moviesId.forEach(function (id) {
-    //       if (actor_movie.id === id) {
-    //         state.actorMovies.push(id);
-    //       }
-    //     });
-    //   });
-    // },
   },
 
   actions: {
@@ -200,6 +190,22 @@ export default {
         headers: getters.authHeader,
       })
         .then((res) => commit("SET_MOVIE", res.data))
+        .catch((err) => console.error(err.response));
+    },
+    followActor({ commit, getters }, actorPk) {
+      /* 좋아요
+      POST: likeArticle URL(token)
+        성공하면
+          state.article 갱신
+        실패하면
+          에러 메시지 표시
+      */
+      axios({
+        url: drf.movies.followActor(actorPk),
+        method: "post",
+        headers: getters.authHeader,
+      })
+        .then((res) => commit("SET_ACTOR", res.data))
         .catch((err) => console.error(err.response));
     },
 
