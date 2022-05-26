@@ -1,6 +1,6 @@
 <template>
   <div v-if="!!movies" class="pt-5">
-    <h1 class="text-white">Movie</h1>
+    <h1 class="text-white" id="top">Movie</h1>
     <search-bar></search-bar>
     <div class="home row row-cols-4 justify-content-center mt-5">
       <movie-card
@@ -18,7 +18,24 @@
         <!-- 댓글 개수/좋아요 개수 -->
       </movie-card>
     </div>
+
+
+        <v-fab-transition>
+        <v-btn
+          color="red darken-3"
+          dark
+          fab
+          fixed
+          bottom
+          right
+          @click="$vuetify.goTo('#top', { duration: 500, offset: 0 })"
+        >
+          <v-icon large>mdi-menu-up</v-icon>
+        </v-btn>
+      </v-fab-transition>
+
   </div>
+
 </template>
 
 <script>

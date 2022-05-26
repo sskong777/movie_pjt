@@ -153,7 +153,7 @@ nav.fill ul li a:after {
   width: 0%;
   content: ".";
   color: transparent;
-  background:red;
+  background: crimson;
   height: 5px;
 }
 nav.stroke ul li a:hover:after {

@@ -79,11 +79,12 @@
       >
         <!-- <v-container class="mx-0"> -->
         <v-row justify="space-around">
-          <v-card>
+          <v-card
+          dark>
             <v-img height="25%" src="https://picsum.photos/600/600/?random">
               <v-app-bar flat color="rgba(0, 0, 0, 0)">
                 <v-icon color="grey lighten-1" large> mdi-account </v-icon>
-                <v-toolbar-title class="text-h6 white--text pl-0">
+                <v-toolbar-title class="white--text pl-0">
                   {{ article.user.username }}
                 </v-toolbar-title>
 
@@ -95,7 +96,7 @@
                   :to="{ name: 'article', params: { articlePk: article.pk } }"
                 >
                   <v-btn color="white" icon>
-                    <v-icon>article</v-icon>
+                    <v-icon large>article</v-icon>
                   </v-btn>
                 </router-link>
               </v-app-bar>
@@ -138,7 +139,7 @@
             <v-img height="25%" src="https://picsum.photos/600/600/?random">
               <v-app-bar flat color="rgba(0, 0, 0, 0)">
                 <v-icon color="grey lighten-1" large> mdi-account </v-icon>
-                <v-toolbar-title class="text-h6 white--text pl-0">
+                <v-toolbar-title class="white--text pl-0">
                   {{ article.user.username }}
                 </v-toolbar-title>
 
@@ -150,7 +151,7 @@
                   :to="{ name: 'article', params: { articlePk: article.pk } }"
                 >
                   <v-btn color="white" icon>
-                    <v-icon>article</v-icon>
+                    <v-icon large>article</v-icon>
                   </v-btn>
                 </router-link>
               </v-app-bar>

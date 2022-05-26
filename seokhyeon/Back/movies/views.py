@@ -7,7 +7,7 @@ from .serializers.movie import ActorSerializer, MovieListSerializer, MovieSerial
 from rest_framework import serializers
 from django.db.models import Count,Avg
 from django.db.models.functions import Coalesce
-from django.core.paginator import Paginator
+import random
 
 @api_view(['GET'])
 def movie_list(request):
@@ -76,7 +76,21 @@ def recommended(request):
     ).all().order_by('-favorite_count')[:10]
     serializer3 = MovieListSerializer(top_user_favorite_movies,many=True)
 
-    return Response([serializer1.data, serializer2.data, serializer3.data])
+
+    
+    popularity_100 = Movie.objects.all().order_by('-popularity')[:200]
+    recent_100 = Movie.objects.all().order_by('-release_date')[:200]
+    sum_movies = (popularity_100 | recent_100).order_by('-vote_avg')[:10]
+    # print(sum_movies)
+    # print(len(sum_movies))
+    serializer4 = MovieListSerializer(sum_movies,many=True)
+    
+
+
+
+    # random_movies = random.sample(Movie.objects.all(),10)
+    # print(random_movies)
+    return Response([serializer1.data, serializer2.data, serializer3.data, serializer4.data])
 
 
 
@@ -153,9 +167,3 @@ def follow_actor(request, actor_pk):
         actor.followed_users.add(user)
         serializer = ActorSerializer(actor)
         return Response(serializer.data)
-
-
-
-@api_view(['GET'])
-def movie_paginator(request):
-    movies = get_object_or_404(Movie )
