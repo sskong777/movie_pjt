@@ -80,7 +80,7 @@
         <!-- <v-container class="mx-0"> -->
         <v-row justify="space-around">
           <v-card
-          dark>
+          >
             <v-img height="25%" src="https://picsum.photos/600/600/?random">
               <v-app-bar flat color="rgba(0, 0, 0, 0)">
                 <v-icon color="grey lighten-1" large> mdi-account </v-icon>

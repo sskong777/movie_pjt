@@ -1,22 +1,16 @@
 <template>
-  <div v-if="!!movies" class="pt-5">
+  <div id="infinite-list" class="pt-5">
     <h1 class="text-white" id="top">Movie</h1>
     <search-bar></search-bar>
     <div class="home row row-cols-4 justify-content-center mt-5">
       <movie-card
-        v-for="movie in movies"
-        :key="movie.pk"
+        v-for="movie in movs"
+        :key="movie.id"
         :movie="movie"
         class="mb-3 mx-3"
       >
-        <!-- 글 이동 링크 (제목) -->
-        <!-- <router-link 
-        :to="{ name: 'movie', params: {moviePk: movie.pk} }">
-        {{ movie.title }}
-      </router-link> -->
-
-        <!-- 댓글 개수/좋아요 개수 -->
       </movie-card>
+
     </div>
 
 
@@ -38,13 +32,24 @@
 
 </template>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.2.0/scrollMonitor.js"></script>
 <script>
 import { mapGetters } from "vuex";
+import axios from "axios";
 import MovieCard from "@/components/movie/MovieCard.vue";
 import SearchBar from "@/components/movie/SearchBar";
 
 export default {
   name: "MovieList",
+  data() {
+    return {
+      movs: [],
+      currentPage: 0,
+      hasNext: true,
+      scrolledToBottom: false,
+    };
+  },
+  
   components: {
     MovieCard,
     SearchBar,
@@ -52,8 +57,54 @@ export default {
   computed: {
     ...mapGetters(["movies"]),
   },
-  methods: {},
-  created() {},
+  methods: {
+    getMovies() {
+      this.currentPage += 1;
+      axios
+        .get(
+          `${process.env.VUE_APP_SERVER_URL}get_movies/?page=${this.currentPage}`
+        )
+        .then((response) => {
+          return response.data;
+        })
+        .then((data) => {
+          // console.log(data.next);
+          this.hasNext = false;
+          if (data.next) {
+            this.hasNext = true;
+          }
+          for (let i = 0; i < data.results.length; i++) {
+            this.movs.push(data.results[i]);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    scroll() {
+      window.onscroll = () => {
+        let bottomOfWindow =
+          Math.max(
+            window.pageYOffset,
+            document.documentElement.scrollTop,
+            document.body.scrollTop
+          ) +
+            window.innerHeight >
+          document.documentElement.offsetHeight;
+
+        if (bottomOfWindow) {
+          this.scrolledToBottom = true; // replace it with your code
+          this.getMovies();
+        }
+      };
+    },
+  },
+  mounted() {
+    this.scroll();
+    this.getMovies();
+  },
+
+
 };
 </script>
 

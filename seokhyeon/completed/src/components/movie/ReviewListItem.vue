@@ -41,8 +41,28 @@
                       !isEditing
                     "
                   >
-                    <button @click="switchIsEditing">Edit</button> |
-                    <button @click="deleteReview(payload)">Delete</button>
+                    <!-- <button @click="switchIsEditing">Edit</button> | -->
+                    <v-btn
+                      color="success"
+                      large
+                      class="ma-1"
+                      plain
+                      @click="switchIsEditing"
+                    >
+                      <v-icon left> mdi-pencil </v-icon>
+                      Edit
+                    </v-btn>
+
+                    <v-btn
+                      @click="deleteReview(payload)"
+                      class="ma-1"
+                      color="error"
+                      plain
+                    >
+                      <v-icon left> delete </v-icon>
+                      Delete
+                    </v-btn>
+                    <!-- <button @click="deleteReview(payload)">Delete</button> -->
                   </div></v-list-item-title
                 >
               </div>

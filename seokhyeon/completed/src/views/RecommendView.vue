@@ -63,6 +63,7 @@
     <hr />
 
     <h1 class="mt-5 pt-5">User Recommend</h1>
+    <h5>사용자 리뷰 평점 순</h5>  
     <carousel-3d
       :disable3d="true"
       :space="365"
@@ -93,6 +94,8 @@
     <hr />
 
     <h1 class="mt-5 pt-5">Attraction</h1>
+    <h5>사용자 좋아요 순</h5>  
+
     <carousel-3d
       :disable3d="true"
       :space="365"
@@ -121,7 +124,7 @@
     </carousel-3d>
 
     <h1 class="mt-5 pt-5">Attraction2</h1>
-    <h4>최신 인기 영화(평점순)</h4>
+    <h5>최신 인기 영화(영화 평점순)</h5>
     <carousel-3d
       :disable3d="true"
       :space="365"
